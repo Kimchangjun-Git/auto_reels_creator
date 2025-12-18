@@ -96,9 +96,10 @@ class ReelsApp(tk.Tk):
         # 오른쪽 패널 제목
         ttk.Label(self.right_panel, text="릴스 미리보기", style='Header.TLabel').pack(pady=5)
 
-        # 비디오 플레이어 프레임 (9:16 비율로 수정)
+        # 비디오 플레이어 프레임 (9:16 비율 고정: 360x640)
         self.player_container = ttk.Frame(self.right_panel, width=360, height=640)
-        self.player_container.pack(pady=10, fill=tk.BOTH, expand=True)
+        self.player_container.pack_propagate(False) # 크기 고정
+        self.player_container.pack(pady=10)
 
         # 비디오 플레이어 위젯
         self.video_player = TkinterVideo(master=self.player_container, scaled=True)
