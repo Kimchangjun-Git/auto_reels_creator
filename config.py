@@ -14,14 +14,22 @@ else:
 
 # API Keys
 # Priorities: 1. settings.json (via settings_manager) -> 2. Environment Variables (.env) -> 3. Default (for playground/dev)
-PEXELS_API_KEY = settings_manager.get('PEXELS_API_KEY', os.getenv('PEXELS_API_KEY', ""))
-GEMINI_API_KEY = settings_manager.get('GEMINI_API_KEY', os.getenv('GEMINI_API_KEY', ""))
-GROQ_API_KEY = settings_manager.get('GROQ_API_KEY', os.getenv('GROQ_API_KEY', ""))
+# API Key 로드 함수 (폴백 처리 강화)
+def get_api_key(key_name, env_name):
+    val = settings_manager.get(key_name)
+    if val:
+        print(f"  ✅ {key_name} 로드 완료 (Settings)")
+        return val
+    val = os.getenv(env_name)
+    if val:
+        print(f"  ✅ {key_name} 로드 완료 (.env)")
+        return val
+    print(f"  ⚠️ {key_name} 로드 실패: settings.json이나 .env 파일에 {env_name}가 없습니다.")
+    return ""
 
-if not GROQ_API_KEY:
-    print("  ⚠️ 경고: GROQ_API_KEY가 설정되지 않았습니다. .env 파일이나 환경 변수를 확인하세요.")
-else:
-    print(f"  ✅ GROQ_API_KEY 로드 완료 ({GROQ_API_KEY[:5]}***)")
+PEXELS_API_KEY = get_api_key('PEXELS_API_KEY', 'PEXELS_API_KEY')
+GEMINI_API_KEY = get_api_key('GEMINI_API_KEY', 'GEMINI_API_KEY')
+GROQ_API_KEY = get_api_key('GROQ_API_KEY', 'GROQ_API_KEY')
 
 # Pexels API Settings
 PEXELS_API_URL = "https://api.pexels.com/videos/search"
