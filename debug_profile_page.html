@@ -1,0 +1,2626 @@
+
+<!doctype html>
+<html lang="ko">
+	<head>
+		<title id="browserTitleArea">
+
+
+
+
+	
+	
+	
+		이태수 기자 :: 네이버 기자페이지
+	
+	
+	
+
+</title>
+		
+
+
+<script>
+	function isMobileDevice() {
+		return /^.*(iPhone|iPod|iPad|Android).*/.test(navigator.userAgent);
+	}
+</script>
+<script>
+	(function () {
+		try {
+			if (isMobileDevice() && isAbleApplyPrefersColorScheme()) {
+				
+				document.querySelector("html").classList.add("DARK_THEME");
+			}
+		} catch(e) {}
+
+		function isAbleApplyPrefersColorScheme() {
+			
+			if (window.matchMedia("(prefers-color-scheme)").matches === false) {
+				return false;
+			}
+
+			var userAgent = navigator.userAgent;
+
+			if (userAgent.indexOf("NAVER") > -1) {
+				
+				if (/.*NAVER\([a-zA-Z]*;\s[a-zA-Z]*;\s([0-9]*);/.test(userAgent)) {
+					return Number(RegExp.$1) >= 1000;
+				}
+			} else {
+				
+				return document.cookie.indexOf("NSCS=1") > -1;
+			}
+
+			return false;
+		}
+	})();
+</script>
+
+		<script>
+			var g_ssc = 'Mnews.v2' || null;
+		</script>
+		<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi"/>
+<link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.news/mnews/resources/20251210_122042/css/generated/journalist.css" />
+			<link rel="shortcut icon" type="image/x-icon" href="https://mimgnews.pstatic.net/image/news/m/2023/favicon/favicon.ico" />
+<script>
+	(function(){
+		var userAgent = navigator.userAgent;
+		var result = [];
+
+		if(userAgent.indexOf('Android') > -1){
+			result = [
+				'<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://ssl.pstatic.net/static.news/image/news/m/2018/favicon/06/android_legacy_hdpi_72X72.png" />',
+				'<link rel="apple-touch-icon-precomposed" sizes="96x96" href="https://ssl.pstatic.net/static.news/image/news/m/2018/favicon/06/android_legacy_xhdpi_96x96.png" />',
+				'<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ssl.pstatic.net/static.news/image/news/m/2018/favicon/06/android_legacy_xxhpdi_144x144.png" />',
+				'<link rel="apple-touch-icon-precomposed" sizes="192x192" href="https://ssl.pstatic.net/static.news/image/news/m/2018/favicon/06/android_legacy_xxxhpdi_192x192.png" />'
+			];
+		}else if(userAgent.indexOf('iPhone') > -1){
+			result = [
+				'<link rel="apple-touch-icon-precomposed" sizes="120X120" href="https://ssl.pstatic.net/static.news/image/news/m/2018/favicon/06/iOS_iPhone_2x_120X120.png" />',
+				'<link rel="apple-touch-icon-precomposed" sizes="180x180" href="https://ssl.pstatic.net/static.news/image/news/m/2018/favicon/06/iOS_iPhone_3x_180X180.png" />'
+			];
+		}else if(userAgent.indexOf('iPad') > -1){
+			result = [
+				'<link rel="apple-touch-icon-precomposed" sizes="167x167" href="https://ssl.pstatic.net/static.news/image/news/m/2018/favicon/06/iOS_iPadPro_2x_167X167.png" />',
+				'<link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://ssl.pstatic.net/static.news/image/news/m/2018/favicon/06/iOS_iPad_2x_152X152.png" />'
+			];
+		}
+		document.write(result.join('\n'));
+	})();
+</script>
+
+<script type="text/javascript" src="https://ssl.pstatic.net/static.news/mnews/resources/20251210_122042/js/generated/statistics_jquery.js"></script>
+	
+
+<script>
+
+document.documentElement.setAttribute('data-useragent', navigator.userAgent);
+
+
+function showNoImage(elImg, type) {
+    switch (type) {
+        
+        case "remove":
+            try {
+                elImg.parentNode.removeChild(elImg);
+            } catch(e) {}
+            break;
+
+        
+        case "removeParent":
+            try {
+                elImg.parentNode.outerHTML = '';
+            } catch(e) {}
+            break;
+
+        
+        case "alt":
+            elImg.outerHTML = ('<span class="noimage_text {imgClassName}">' + (elImg.alt || "") + '</span>')
+                
+                .replace('{imgClassName}', elImg.className);
+            break;
+
+		
+		case "class" :
+			var outerHTMLSource = Number(elImg.getAttribute("height")) > 0?
+				
+				'<span class="noimage_wrap {imgClassName}" style="height:' + elImg.getAttribute("height") + 'px;"><span class="noimage"></span></span>':
+				'<span class="noimage_wrap {imgClassName}"><span class="noimage"></span></span>';
+			elImg.outerHTML = outerHTMLSource.replace('{imgClassName}', elImg.className);
+			break;
+
+        case "pressname" :
+            var pressname = elImg.getAttribute("data-pressname");
+            elImg.outerHTML = '<span class="cnb_broadcast_noimg"><span class="noimg_text">' + pressname + '</span></span>';
+            break;
+
+        case "noHeight":
+            
+            elImg.outerHTML = '<span class="noimage_wrap"><span class="noimage"></span></span>';
+            break;
+
+        case "displayFallback":
+            elImg.style.display = "none";
+            var elWrapper = elImg.closest("._NOIMAGE_WRAPPER");
+            if (elWrapper) {
+                var elFallback = elWrapper.querySelector("._NOIMAGE_FALLBACK");
+                if (elFallback) {
+                    elFallback.style.display = "block";
+                }
+            }
+            break;
+
+        
+        default:
+            
+            elImg.outerHTML = Number(elImg.getAttribute("height")) > 0?
+                
+                '<span class="noimage_wrap" style="height:' + elImg.getAttribute("height") + 'px;"><span class="noimage"></span></span>':
+                '<span class="noimage_wrap"><span class="noimage"></span></span>';
+    }
+}
+
+
+function doAfterLoadEnd(callback, callbackOnPersisted) {
+    var eventName = "onpageshow" in window ? "pageshow" : "load";
+
+    callback = callback || function(){};
+    callbackOnPersisted = callbackOnPersisted || function(){};
+
+    window.addEventListener(eventName, function(e) {
+        try{
+            if(Boolean(e.persisted)){ 
+                callbackOnPersisted();
+                return;
+            }
+        }catch(e){}
+
+        callback();
+    });
+}
+</script>
+
+		<meta property="og:title" content="연합뉴스 이태수 기자페이지"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://media.naver.com/journalist/001/74794"/>
+<meta property="og:image" content="https://mimgnews.pstatic.net/image/upload/office_logo/001/2017/12/21/logo_001_41_20171221154521.jpg"/>
+<meta property="og:article:author" content="연합뉴스 | 네이버"/>
+<meta property="og:description" content="연합뉴스이태수 기자페이지"/>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="연합뉴스 이태수 기자페이지">
+<meta name="twitter:site" content="연합뉴스 | 네이버">
+<meta name="twitter:creator" content="연합뉴스 | 네이버">
+<meta name="twitter:image" content="https://mimgnews.pstatic.net/image/upload/office_logo/001/2017/12/21/logo_001_41_20171221154521.jpg">
+<meta name="twitter:description" content="연합뉴스이태수 기자페이지">
+
+		
+		
+		
+
+		
+		
+	</head>
+
+	<body class="body_journalist _font_size_setting_target" style="color: #214086;">
+	<script>
+		(function(){
+			try{
+				var settingTarget = document.querySelector('._font_size_setting_target');
+				var defaultFontSize = /(?:\s|^)?NFS=(\d)(?:;|$)/.test(document.cookie)? RegExp.$1: '1';
+				var newFontSizeClass = 'bfsize' + (parseInt(defaultFontSize)-1);
+				if(newFontSizeClass === 'bfsize0') {
+					return;
+				}
+
+				settingTarget.className = settingTarget.className + " " + newFontSizeClass;
+			}catch(e){}
+		})();
+	</script>
+	<div class="u_skip"><a href="#ct">본문 바로가기</a></div>
+	<section class="news_header as_white_type">
+	<header class="nh_header" role="banner">
+		<div class="Ngnb">
+			<div class="Ngnb_inner">
+				<div class="Ngnb_both">
+					<div class="Ngnb_left">
+						<span class="Ngnb_logo"><a href="https://www.naver.com" class="Nlogo_link" onclick="nclk(event,'gnb.naver','','');"><span class="Nicon_logo">NAVER</span></a></span>
+						<div class="Ngnb_service">
+							<h1 class="Nservice_item">
+								<a href="https://m.news.naver.com" data-mpurl='{"m":"https://m.news.naver.com","p":"https://news.naver.com"}' onclick="nclk(event,'gnb.news','','');">
+										<span class="Nicon_service">뉴스</span>
+									</a>
+								</h1>
+							<span class="Nservice_subitem">
+								<a href="https://m.entertain.naver.com/home" data-mpurl='{"m":"https://m.entertain.naver.com/home","p":"https://entertain.naver.com/home"}' onclick="nclk(event,'gnb.enter','','');">
+									<span class="Nicon_family Nicon_entertain">엔터</span>
+								</a>
+							</span>
+							<span class="Nservice_subitem">
+								<a href="https://m.sports.naver.com/" data-mpurl='{"m":"https://m.sports.naver.com/","p":"https://sports.news.naver.com/index"}' onclick="nclk(event,'gnb.sports','','');">
+									<span class="Nicon_family Nicon_sports">스포츠</span>
+								</a>
+							</span>
+							<span class="Nservice_subitem">
+								<a href="https://weather.naver.com/" onclick="nclk(event,'gnb.weather','','');">
+									<span class="Nicon_family Nicon_weather">날씨</span>
+								</a>
+							</span>
+							<span class="Nservice_subitem">
+								<a href="https://contents.premium.naver.com/" onclick="nclk(event,'gnb.premium','','');">
+									<span class="Nicon_family Nicon_premium">프리미엄</span>
+								</a>
+							</span>
+						</div>
+					</div>
+					
+<div class="Ngnb_right">
+    <div class="Ngnb_group">
+        <div id="gnb" class="gnb_dark_type2"></div>
+    </div>
+    
+    <div class="Ngnb_search is_hidden _search_content"></div>
+    <div class="Ngnb_tool">
+        <a href="javascript:;"
+           class="Ntool_button _search_content_toggle_btn"
+           onclick="nclk(event,'gnb.sch','','');"><span class="Nicon_search">검색</span></a>
+    </div>
+</div>
+</div>
+			</div>
+		</div>
+	</header>
+</section>
+
+	
+
+
+
+
+
+<section class="journalist_float _journalist_float_wrapper">
+	<div class="journalist_float_inner">
+		<div class="journalist_float_both">
+			<div class="journalist_float_left">
+				<a href="javascript:news.Util.doHistoryBack();" class="journalist_float_back">이전 페이지</a>
+				<span class="journalist_float_logo">
+					<a href="https://m.naver.com" data-mpurl='{"m":"https://m.naver.com","p":"https://www.naver.com"}' class="journalist_float_logolink" onclick="nclk(event,'gnb.naver','','');">
+						<span class="journalist_float_naver">NAVER</span>
+					</a>
+				</span>
+				<div class="journalist_float_service">
+					<span class="journalist_float_service_item">
+						
+							<a href="https://m.news.naver.com" data-mpurl='{"m":"https://m.news.naver.com","p":"https://news.naver.com"}' class="journalist_float_service_itemlink" onclick="nclk(event,'gnb.news','','');">
+								<span class="journalist_float_service_text">뉴스</span>
+							</a>
+						
+						
+						
+					</span>
+				</div>
+			</div>
+			<div class="journalist_float_center">
+				
+				
+					
+						<a href="/press/001" class="journalist_float_center_press">
+					
+					
+				
+					<span class="journalist_float_center_logo">
+						<img src='https://mimgnews.pstatic.net/image/upload/office_logo/001/2025/03/07/logo_001_100_20250307145612.png' width='44' height='44' alt='연합뉴스' title='연합뉴스' class='' style='' onerror='showNoImage(this, "removeParent")' >
+					</span>
+					연합뉴스
+				
+					
+						</a>
+					
+					
+				
+				<a href="/journalist/001/74794" class="journalist_float_center_journalist">이태수 기자</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<hr />
+
+	
+
+<div id="ct" role="main" class="journalist_wrap">
+	
+	
+
+	<div class="journalist_container">
+		<div class="journalist_content">
+			<section class="journalist_sidebar">
+				<div class="journalist_sidebar_inner">
+					
+					
+
+
+	
+	
+	
+
+
+
+<div class="journalist_profile">
+	<div class="journalist_profile_head">
+		<div class="journalist_profile_head_float">
+			<div class="journalist_profile_head_inner">
+				<a href="javascript:news.Util.doHistoryBack();" onclick="nclk(event,'man.back','','');" class="journalist_profile_head_back _history_back_button">이전 페이지</a>
+				<div class="journalist_profile_head_head">
+					<h1 class="blind">기자홈</h1>
+				</div>
+				
+				<a href="/journalists/whole?officeId=001" class="journalist_profile_head_more" onclick="nclk(event,'man_hom.total','','');">전체 기자</a>
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="journalist_profile_body">
+		<div class="journalist_profile_body_inner">
+			
+			
+			<div class="media_reporter_profile">
+				<div class="media_reporter_profile_inner">
+					<div class="media_reporter_profile_basic">
+						
+						<div class="media_reporter_basic_photo _NOIMAGE_WRAPPER">
+							
+							
+							<span class="no_profile _NOIMAGE_FALLBACK">
+								<span class="blind">이태수</span>
+							</span>
+						</div>
+						<div class="media_reporter_basic_text">
+							
+								
+									<a href="/press/001" class="media_reporter_basic_press">
+								
+								
+							
+								
+								<span class="media_reporter_basic_press_logo">
+									<img src='https://mimgnews.pstatic.net/image/upload/office_logo/001/2025/03/07/logo_001_100_20250307145612.png' width='52' height='52' alt='연합뉴스' title='연합뉴스' class='' style='' onerror='showNoImage(this, "removeParent")' >
+								</span>
+								<span class="media_reporter_basic_press_txt">연합뉴스</span>
+							
+								
+									</a>
+								
+								
+							
+							<h2 class="media_reporter_basic_name">이태수</h2>
+						</div>
+					</div>
+					<div class="media_reporter_profile_info">
+						
+						
+							<p class="media_reporter_profile_introduce">안녕하세요. 이태수 기자입니다.</p>
+
+						
+						<div class="media_reporter_profile_myfeed _my_feed_wrapper" style="color: #214086">
+							
+							
+							<div class="media_reporter_profile_popularity">
+								<ul class="media_reporter_popularity_list">
+									<li><span class="_my_feed_follower_count" data-display-zero-count="true" data-subscribechannelkey="JOURNALIST_74794">구독<em class="media_reporter_popularity_subscribenum _journalist_subscribe_count _txt" data-use-bold="true">0</em></span></li>
+									<li>
+										<div class="_reactionModule" data-sid="JOURNALIST" data-cid="74794" data-ccounttype="period">
+											<span class="_button" data-type="cheer" data-isHiddenZeroCount="false" data-isHiddenLabelAsZeroCount="false">
+												응원<em class="u_cnt _count _journalist_cheer_count">0</em>
+											</span>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="media_reporter_profile_btns">
+
+								
+								<div class="subscribe_wrap">
+									
+									<a href="javascript:;" class="subscribe is_preparing _my_feed_btn _profile_subscribe"
+										data-subscribeChannelName="JOURNALIST"
+										data-subscribeChannelKey="JOURNALIST_74794"
+										data-subscribeName="이태수"
+										data-clickcode-follow="man.subs"
+										data-clickcode-unfollow="man.unsubs"
+										data-serviceType="news"
+										data-guide-layer-press-logo="https://mimgnews.pstatic.net/image/upload/office_logo/001/2025/03/07/logo_001_100_20250307145612.png">
+										<span class="subscribe_ico"><span class="_txt">구독</span></span>
+									</a>
+								</div>
+								
+
+								
+								<div class="media_likeit_wrap _reaction_cheer_module">
+									<div class="u_likeit_list_module _reactionModule" data-sid="JOURNALIST" data-cid="74794" data-ccounttype="period">
+										
+										
+										<a class="u_likeit_list_btn is_preparing _button" href="javascript:;" role="button" aria-haspopup="true" aria-pressed="false" data-type="cheer" data-isHiddenCount="true" data-log="man.like|man.unlike">
+											<span class="u_txt _label">응원</span>
+										</a>
+									</div>
+									
+									<div class="media_likeit_layer is_hidden _reaction_cheer_notice">
+										<p class="media_likeit_layer_text"><strong>응원해주셔서 감사합니다</strong></p>
+										<p class="media_likeit_layer_text">기자별 응원은 하루 한 번 가능합니다</p>
+										<button type="button" class="media_likeit_layer_close _close_btn">닫기</button>
+									</div>
+								</div>
+								
+
+								
+								
+								
+								
+								
+								
+								
+
+								
+								<div class="media_reporter_share">
+									<a href="#" id="spiButton" onclick="nclk(event, 'man.share', '', '');" class="naver-splugin spi_sns_share u_btn_sns_share"
+									   data-style="standard"
+									   data-url="https://media.naver.com/journalist/001/74794"
+									   data-title="연합뉴스 이태수 기자페이지"
+									   data-mail-url="https://media.naver.com/journalist/001/74794?lfrom=mail"
+									   data-blog-url="https://media.naver.com/journalist/001/74794?lfrom=blog"
+									   data-blog-source-type="3"
+									   data-blog-blog-id="naver"
+									   data-cafe-url="https://media.naver.com/journalist/001/74794?lfrom=cafe"
+									   data-cafe-source-type="3"
+									   data-memo-url="https://media.naver.com/journalist/001/74794?lfrom=memo"
+									   data-calendar-url="https://media.naver.com/journalist/001/74794?lfrom=calendar"
+									   data-band-url="https://media.naver.com/journalist/001/74794?lfrom=band"
+									   data-line-url="https://media.naver.com/journalist/001/74794?lfrom=line"
+									   data-kakaotalk-url="https://media.naver.com/journalist/001/74794?lfrom=kakao"
+									   data-kakaostory-display="off"
+									   data-kakaotalk-image-url="https://ssl.pstatic.net/static.news/image/news/m/2015/10/press_logo/001_1200x630.jpg"
+									   data-facebook-url="https://media.naver.com/journalist/001/74794?lfrom=facebook"
+									   data-twitter-url="https://media.naver.com/journalist/001/74794?lfrom=twitter"
+									   data-mypeople-url="https://media.naver.com/journalist/001/74794?lfrom=mypeople"
+									   data-friend-display="on"
+									   data-friend-url="https://media.naver.com/journalist/001/74794?lfrom=friend">
+										<span class="naver-splugin-c send_caption"><span class="u_hc">SNS 보내기</span></span></a>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+				
+				<div class="media_reporter_profile_box_and_notice">
+					
+					
+
+
+
+
+
+
+
+
+
+
+
+    <div class="media_reporter_profile_box _media_reporter_detail_profile_box is_loading is_closed">
+        <div class="media_reporter_profile_box_top">
+            <a href="javascript:;" class="media_reporter_profile_title _media_reporter_detail_profile_more_layer" onclick="nclk(event,'man.pclose','','');">
+                
+                
+                    <div class="media_reporter_profile_title_item">
+                        <i class="media_reporter_profile_title_icon_statistics" aria-label="통계"></i>통계
+                    </div>
+                
+            </a>
+        </div>
+        <div class="media_reporter_profile_box_bottom">
+            
+            
+            
+            
+
+            
+            
+                
+                
+                    
+                
+            
+            
+
+            
+            
+                <div class="media_reporter_profile_statistics">
+                    
+                        <div class="media_reporter_profile_article_count">
+                            <h3>기사 통계<em class="media_reporter_sub_title">2025.11.15.~2025.12.14.</em></h3>
+                            <ul class="media_reporter_summary_list">
+                                <li class="media_reporter_summary_item">
+                                    최근 한 달(30일)간 <em>총 107</em>건의 기사를 작성했습니다.
+                                </li>
+                                
+                                    <li class="media_reporter_summary_item">
+                                        <em>엔터</em> 섹션 기사가 가장 많습니다.
+                                    </li>
+                                
+                            </ul>
+                            <div class="media_reporter_profile_article_graph">
+                                <div class="barchart">
+                                    <div class="y_axis">
+                                        <span class="y_axis_label">10</span>
+                                        <span class="y_axis_label"></span>
+                                        <span class="y_axis_label">0</span>
+                                    </div>
+                                    <div class="data_area _content_graph_data_area">
+                                        <div class="level_line_area">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                        <dl class="value_list">
+                                            
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date is_show _count_date"
+                                                        data-content-date="11.15">11.15</dt>
+                                                    <dd class="count_value" style="height: 10.0%">
+                                                        <span class="blind _content_count" data-content-count="1">1</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.15
+                                                                <strong class="balloon_value">1건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.16">11.16</dt>
+                                                    <dd class="count_value" style="height: 10.0%">
+                                                        <span class="blind _content_count" data-content-count="1">1</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.16
+                                                                <strong class="balloon_value">1건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.17">11.17</dt>
+                                                    <dd class="count_value" style="height: 50.0%">
+                                                        <span class="blind _content_count" data-content-count="5">5</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.17
+                                                                <strong class="balloon_value">5건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.18">11.18</dt>
+                                                    <dd class="count_value" style="height: 30.0%">
+                                                        <span class="blind _content_count" data-content-count="3">3</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.18
+                                                                <strong class="balloon_value">3건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.19">11.19</dt>
+                                                    <dd class="count_value" style="height: 40.0%">
+                                                        <span class="blind _content_count" data-content-count="4">4</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.19
+                                                                <strong class="balloon_value">4건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.20">11.20</dt>
+                                                    <dd class="count_value" style="height: 20.0%">
+                                                        <span class="blind _content_count" data-content-count="2">2</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.20
+                                                                <strong class="balloon_value">2건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.21">11.21</dt>
+                                                    <dd class="count_value" style="height: 50.0%">
+                                                        <span class="blind _content_count" data-content-count="5">5</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.21
+                                                                <strong class="balloon_value">5건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.22">11.22</dt>
+                                                    <dd class="count_value" style="height: 40.0%">
+                                                        <span class="blind _content_count" data-content-count="4">4</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.22
+                                                                <strong class="balloon_value">4건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.23">11.23</dt>
+                                                    <dd class="count_value" style="height: 0.0%">
+                                                        <span class="blind _content_count" data-content-count="0">0</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.23
+                                                                <strong class="balloon_value">0건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.24">11.24</dt>
+                                                    <dd class="count_value" style="height: 30.0%">
+                                                        <span class="blind _content_count" data-content-count="3">3</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.24
+                                                                <strong class="balloon_value">3건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date is_show _count_date"
+                                                        data-content-date="11.25">11.25</dt>
+                                                    <dd class="count_value" style="height: 40.0%">
+                                                        <span class="blind _content_count" data-content-count="4">4</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.25
+                                                                <strong class="balloon_value">4건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.26">11.26</dt>
+                                                    <dd class="count_value" style="height: 30.0%">
+                                                        <span class="blind _content_count" data-content-count="3">3</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.26
+                                                                <strong class="balloon_value">3건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.27">11.27</dt>
+                                                    <dd class="count_value" style="height: 70.0%">
+                                                        <span class="blind _content_count" data-content-count="7">7</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.27
+                                                                <strong class="balloon_value">7건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.28">11.28</dt>
+                                                    <dd class="count_value" style="height: 80.0%">
+                                                        <span class="blind _content_count" data-content-count="8">8</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.28
+                                                                <strong class="balloon_value">8건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.29">11.29</dt>
+                                                    <dd class="count_value" style="height: 0.0%">
+                                                        <span class="blind _content_count" data-content-count="0">0</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.29
+                                                                <strong class="balloon_value">0건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="11.30">11.30</dt>
+                                                    <dd class="count_value" style="height: 30.0%">
+                                                        <span class="blind _content_count" data-content-count="3">3</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                11.30
+                                                                <strong class="balloon_value">3건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="12.1">12.1</dt>
+                                                    <dd class="count_value" style="height: 80.0%">
+                                                        <span class="blind _content_count" data-content-count="8">8</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.1
+                                                                <strong class="balloon_value">8건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="12.2">12.2</dt>
+                                                    <dd class="count_value" style="height: 20.0%">
+                                                        <span class="blind _content_count" data-content-count="2">2</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.2
+                                                                <strong class="balloon_value">2건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="12.3">12.3</dt>
+                                                    <dd class="count_value" style="height: 60.0%">
+                                                        <span class="blind _content_count" data-content-count="6">6</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.3
+                                                                <strong class="balloon_value">6건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="12.4">12.4</dt>
+                                                    <dd class="count_value" style="height: 40.0%">
+                                                        <span class="blind _content_count" data-content-count="4">4</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.4
+                                                                <strong class="balloon_value">4건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date is_show _count_date"
+                                                        data-content-date="12.5">12.5</dt>
+                                                    <dd class="count_value" style="height: 60.0%">
+                                                        <span class="blind _content_count" data-content-count="6">6</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.5
+                                                                <strong class="balloon_value">6건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="12.6">12.6</dt>
+                                                    <dd class="count_value" style="height: 60.0%">
+                                                        <span class="blind _content_count" data-content-count="6">6</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.6
+                                                                <strong class="balloon_value">6건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="12.7">12.7</dt>
+                                                    <dd class="count_value" style="height: 20.0%">
+                                                        <span class="blind _content_count" data-content-count="2">2</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.7
+                                                                <strong class="balloon_value">2건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="12.8">12.8</dt>
+                                                    <dd class="count_value" style="height: 50.0%">
+                                                        <span class="blind _content_count" data-content-count="5">5</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.8
+                                                                <strong class="balloon_value">5건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="12.9">12.9</dt>
+                                                    <dd class="count_value" style="height: 40.0%">
+                                                        <span class="blind _content_count" data-content-count="4">4</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.9
+                                                                <strong class="balloon_value">4건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="12.10">12.10</dt>
+                                                    <dd class="count_value" style="height: 30.0%">
+                                                        <span class="blind _content_count" data-content-count="3">3</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.10
+                                                                <strong class="balloon_value">3건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="12.11">12.11</dt>
+                                                    <dd class="count_value" style="height: 30.0%">
+                                                        <span class="blind _content_count" data-content-count="3">3</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.11
+                                                                <strong class="balloon_value">3건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="12.12">12.12</dt>
+                                                    <dd class="count_value" style="height: 0.0%">
+                                                        <span class="blind _content_count" data-content-count="0">0</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.12
+                                                                <strong class="balloon_value">0건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item ">
+                                                    <dt class="count_date  _count_date"
+                                                        data-content-date="12.13">12.13</dt>
+                                                    <dd class="count_value" style="height: 50.0%">
+                                                        <span class="blind _content_count" data-content-count="5">5</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.13
+                                                                <strong class="balloon_value">5건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                            
+                                                
+                                                
+                                                <div class="value_item _content_graph_item is_selected">
+                                                    <dt class="count_date is_show _count_date"
+                                                        data-content-date="12.14">12.14</dt>
+                                                    <dd class="count_value" style="height: 0.0%">
+                                                        <span class="blind _content_count" data-content-count="0">0</span>
+                                                        <div class="balloon_area">
+                                                            <div class="balloon">
+                                                                12.14
+                                                                <strong class="balloon_value">0건</strong>
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                                
+                                                    
+                                                
+                                            
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    
+                        <div class="media_reporter_profile_subscriber_statistics">
+                            <h3>
+                                구독자 통계
+                                
+                                    <em class="media_reporter_sub_title">2025.12.14일까지 집계</em>
+                                
+                            </h3>
+                            <div class="media_reporter_profile_group_graph">
+                                <dl class="group_barchart">
+                                    
+                                        
+                                        <div class="group">
+                                            <dt class="label">
+                                                10<span class="label_unit">대</span>
+                                                
+                                            </dt>
+                                            <dd class="value">
+                                                <div class="bar "
+                                                     style="height: 1.040118870728083%">
+                                                    <span class="percent">1%</span>
+                                                    <span class="rank">6</span>
+                                                    <span class="blind">위</span>
+                                                </div>
+                                            </dd>
+                                        </div>
+                                    
+                                        
+                                        <div class="group">
+                                            <dt class="label">
+                                                20<span class="label_unit">대</span>
+                                                
+                                            </dt>
+                                            <dd class="value">
+                                                <div class="bar "
+                                                     style="height: 5.49777117384844%">
+                                                    <span class="percent">3%</span>
+                                                    <span class="rank">5</span>
+                                                    <span class="blind">위</span>
+                                                </div>
+                                            </dd>
+                                        </div>
+                                    
+                                        
+                                        <div class="group">
+                                            <dt class="label">
+                                                30<span class="label_unit">대</span>
+                                                
+                                            </dt>
+                                            <dd class="value">
+                                                <div class="bar "
+                                                     style="height: 15.118870728083209%">
+                                                    <span class="percent">8%</span>
+                                                    <span class="rank">4</span>
+                                                    <span class="blind">위</span>
+                                                </div>
+                                            </dd>
+                                        </div>
+                                    
+                                        
+                                        <div class="group">
+                                            <dt class="label">
+                                                40<span class="label_unit">대</span>
+                                                
+                                            </dt>
+                                            <dd class="value">
+                                                <div class="bar "
+                                                     style="height: 24.62852897473997%">
+                                                    <span class="percent">13%</span>
+                                                    <span class="rank">3</span>
+                                                    <span class="blind">위</span>
+                                                </div>
+                                            </dd>
+                                        </div>
+                                    
+                                        
+                                        <div class="group">
+                                            <dt class="label">
+                                                50<span class="label_unit">대</span>
+                                                
+                                            </dt>
+                                            <dd class="value">
+                                                <div class="bar is_top"
+                                                     style="height: 41.08469539375928%">
+                                                    <span class="percent">22%</span>
+                                                    <span class="rank">2</span>
+                                                    <span class="blind">위</span>
+                                                </div>
+                                            </dd>
+                                        </div>
+                                    
+                                        
+                                        <div class="group">
+                                            <dt class="label">
+                                                60<span class="label_unit">대</span>
+                                                
+                                                    <span class="label_arrow"><span class="blind">이상</span></span>
+                                                
+                                            </dt>
+                                            <dd class="value">
+                                                <div class="bar is_top"
+                                                     style="height: 100.0%">
+                                                    <span class="percent">53%</span>
+                                                    <span class="rank">1</span>
+                                                    <span class="blind">위</span>
+                                                </div>
+                                            </dd>
+                                        </div>
+                                    
+                                </dl>
+                                <div class="group_piechart _gender_chart_area">
+                                    <div class="pie_chart _gender_chart _pie_chart_view" style="display: none" id="_gender_pie_chart"></div>
+                                    <dl class="legend_list _gender_chart_legend _pie_chart_view" style="display: none">
+                                        <dt class="legend is_male _male">남자</dt>
+                                        <dd class="blind _male">29%</dd>
+                                        <dt class="legend is_female">여자</dt>
+                                        <dd class="blind">71%</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    </div>
+
+
+					
+
+					
+					
+					
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+
+					
+					
+						<div class="channel_add_wrap">
+							<div class="channel_add">
+								<div class="channel_add_inner">
+										
+									<span class="channel_add_image"><img src='https://mimgnews.pstatic.net/image/upload/office_logo/001/2025/03/07/logo_001_100_20250307145612.png' width='28' height='28' alt='연합뉴스' title='연합뉴스' class='' style='' onerror='showNoImage(this, "removeParent")' ></span>
+									<span class="channel_add_text"><a href="https://media.naver.com/press/001" class="channel_add_text" onclick="nclk(this, 'man.pressban', '', '')";><strong>연합뉴스</strong>의 기사를 더 보려면?</a></span>
+									<span class="_channel_subscribe_btn_journalist"></span>
+								</div>
+							</div>
+						</div>
+					
+
+					
+					<div class="tojournalist_wrap">
+						<a href="/journalists/001" class="tojournalist">
+							<div class="tojournalist_inner">
+								<span class="tojournalist_image"><img src='https://mimgnews.pstatic.net/image/upload/office_logo/001/2025/03/07/logo_001_100_20250307145612.png' width='29' height='29' alt='연합뉴스' title='연합뉴스' class='' style='' onerror='showNoImage(this, "removeParent")' ></span>
+								<span class="tojournalist_press">연합뉴스</span>
+								<span class="tojournalist_go">전체기자 보기</span>
+							</div>
+						</a>
+					</div>
+				</div>
+			</section>
+
+			
+			<section class="journalist_main as_top_link_none">
+				<div class="journalist_main_inner">
+					<div class="journalist_article">
+						<div class="journalist_article_top">
+							<div class="journalist_article_top_inner">
+								
+
+
+
+	
+	
+		
+	
+
+
+
+
+							</div>
+						</div>
+						<div class="r_home_wrp">
+							<div class="r_sect_box">
+								
+
+
+
+	
+	
+		
+			
+			<div class="best_box_wrap _CURATION_CARD">
+		<div class="best_box">
+			<div class="best_box_head">
+				<h2 class="best_box_h">주간 많이 본 뉴스</h2>
+				
+					<p class="best_box_date">
+						2025.12.09.~2025.12.15.
+					</p>
+				
+			</div>
+			<ul class="best_news">
+				
+					<li>
+						<a href="https://n.news.naver.com/article/001/0015794452?ntype=RANKING&type=journalists" class="best_news_link" onclick="nclk(event,'man.bestart','','');">
+							<div class="best_news_text">
+								<em class="best_news_flag"><span>1</span></em>
+								<div class="best_news_headline">
+									<strong class="best_news_title">변요한-티파니 스타 커플 탄생…결혼 전제 교제(종합)</strong>
+									<div class="best_news_info">
+										<span class="best_news_datetime">1일전</span>
+									</div>
+								</div>
+							</div>
+							<div class="best_news_image">
+								<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/13/15794452.jpg?type=nf600_360" alt="" onerror="showNoImage(this)">
+								
+							</div>
+						</a>
+					</li>
+				
+					<li>
+						<a href="https://n.news.naver.com/article/001/0015788762?ntype=RANKING&type=journalists" class="best_news_link" onclick="nclk(event,'man.bestart','','');">
+							<div class="best_news_text">
+								<em class="best_news_flag"><span>2</span></em>
+								<div class="best_news_headline">
+									<strong class="best_news_title">나혼산, 박나래 링거언급 비공개…정재형 &#034;주사이모 일면식 없다&#034;(종합)</strong>
+									<div class="best_news_info">
+										<span class="best_news_datetime">4일전</span>
+									</div>
+								</div>
+							</div>
+							<div class="best_news_image">
+								<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/10/15788762.jpg?type=nf600_360" alt="" onerror="showNoImage(this)">
+								
+							</div>
+						</a>
+					</li>
+				
+					<li>
+						<a href="https://n.news.naver.com/article/001/0015794418?ntype=RANKING&type=journalists" class="best_news_link" onclick="nclk(event,'man.bestart','','');">
+							<div class="best_news_text">
+								<em class="best_news_flag"><span>3</span></em>
+								<div class="best_news_headline">
+									<strong class="best_news_title">중일 갈등에 K팝도 불똥…日 멤버 포함 중국 행사 차질 잇따라</strong>
+									<div class="best_news_info">
+										<span class="best_news_datetime">2일전</span>
+									</div>
+								</div>
+							</div>
+							<div class="best_news_image">
+								<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/13/15794418.jpg?type=nf600_360" alt="" onerror="showNoImage(this)">
+								
+							</div>
+						</a>
+					</li>
+				
+			</ul>
+		</div>
+	</div>
+		
+			
+			<div class="channel_add_wrap" id="PressSubscribeBanner">
+    <div class="channel_add">
+        <div class="channel_add_inner">
+            <span class="channel_add_image"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src='https://mimgnews.pstatic.net/image/upload/office_logo/001/2025/03/07/logo_001_100_20250307145612.png' width='28' height='28' alt='연합뉴스' title='연합뉴스' class='' style='' onerror='showNoImage(this, "removeParent")' ></span>
+            <span class="channel_add_text"><a href="https://media.naver.com/press/001" class="channel_add_text" onclick="nclk(this, 'man.pressban', '', '')";><strong>연합뉴스</strong>의 기사를 더 보려면?</a></span>
+            <span class="_channel_subscribe_btn_journalist"></span>
+        </div>
+    </div>
+</div>
+		
+			
+			<div class="press_edit_news _CURATION_CARD _journalist_more_view _persist_wrap" persist-key="journalist_home" data-card-id="85796984-b62f-40a3-8eea-f72bf1cbb1a5">
+	<h2 class="press_edit_news_h"><span class="press_edit_news_h_inner">전체 기사</span></h2>
+	<div class="press_edit_news_body">
+		
+		<ul class="press_edit_news_list">
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88204050" data-comment='{"gno":"news001,0015796355","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015796355?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,1);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/15/15796355.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">이문세 &#034;40년간 구슬 꿰듯 모아, 어느덧 100% 히트곡 공연&#034;</span>
+				<span class="r_ico_b r_modify is_outdated"><b>1시간전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88181492" data-comment='{"gno":"news001,0015794658","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015794658?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,2);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/13/15794658.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">관능적 에너지 뿜어낸 도자 캣…대담한 퍼포먼스에 손가락 하트</span>
+				<span class="r_ico_b r_modify is_outdated"><b>1일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88177695" data-comment='{"gno":"news001,0015794427","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015794427?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,3);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/13/15794427.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">최현석 셰프 할아버지 된다…최연수·딕펑스 김태현 임신 공개</span>
+				<span class="r_ico_b r_modify is_outdated"><b>1일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88176635" data-comment='{"gno":"news001,0015794351","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015794351?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,4);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/13/15794351.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">英 싱글 차트서 &#039;골든&#039; 22위 등 &#039;케데헌&#039; OST 3곡 차트인</span>
+				<span class="r_ico_b r_modify is_outdated"><b>2일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88150002" data-comment='{"gno":"news001,0015792209","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015792209?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,5);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/11/15792209.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">온유, 주사이모 관련 의혹에 &#034;피부 관리 목적 병원 방문한 것&#034;</span>
+				<span class="r_ico_b r_modify is_outdated"><b>3일전</b></span>
+			</span>
+			</a>
+		</li>
+		</ul>
+	
+		<ul class="press_edit_news_list">
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88147476" data-comment='{"gno":"news001,0015792095","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015792095?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,6);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/11/15792095.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">[가요소식] 10대 싱어송라이터 민서, 데뷔 싱글 &#039;미로&#039;</span>
+				<span class="r_ico_b r_modify is_outdated"><b>3일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88144682" data-comment='{"gno":"news001,0015791885","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015791885?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,7);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/11/15791885.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">김지미, 생전 주연 영화 OST 불러…최무룡과 음반 커버도 장식</span>
+				<span class="r_ico_b r_modify is_outdated"><b>3일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88105412" data-comment='{"gno":"news001,0015788114","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015788114?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,8);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/10/15788114.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">美 빌보드 싱글 연말 결산서 로제 &#039;아파트&#039; 9위·&#039;골든&#039; 25위</span>
+				<span class="r_ico_b r_modify is_outdated"><b>5일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88103653" data-comment='{"gno":"news001,0015787892","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015787892?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,9);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/10/15787892.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">방시혁 &#034;인도 법인, 남아시아 문화 허브로…내년초 전국 오디션&#034;</span>
+				<span class="r_ico_b r_modify is_outdated"><b>5일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88086783" data-comment='{"gno":"news001,0015786708","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015786708?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,10);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/09/15786708.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">싱어송라이터 안희수, 3집 &#039;오염된 마음으로부터&#039; 발표</span>
+				<span class="r_ico_b r_modify is_outdated"><b>5일전</b></span>
+			</span>
+			</a>
+		</li>
+		</ul>
+	
+		<ul class="press_edit_news_list">
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88084466" data-comment='{"gno":"news001,0015786430","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015786430?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,11);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/09/15786430.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">신화 이민우, 어제 득녀…내년 봄 결혼식 예정</span>
+				<span class="r_ico_b r_modify is_outdated"><b>5일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88076654" data-comment='{"gno":"news001,0015785652","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015785652?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,12);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/09/15785652.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">[가요소식] NCT 도영, 입대 다음 날 새 싱글 &#039;프로미스&#039;</span>
+				<span class="r_ico_b r_modify is_outdated"><b>6일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88075544" data-comment='{"gno":"news001,0015785531","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015785531?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,13);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/09/15785531.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">BTS 정국, 음악지 롤링스톤 韓·英·日 3개국 표지 모델</span>
+				<span class="r_ico_b r_modify is_outdated"><b>6일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_no_thumb _rcount" data-journalist-article-id="88054271" data-comment='{"gno":"news001,0015783901","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015783901?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,14);">
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">[부고] 문득일(전 아모레퍼시픽 새행신 특약점 대표)씨 별세</span>
+				<span class="r_ico_b r_modify is_outdated"><b>7일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88053824" data-comment='{"gno":"news001,0015783869","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015783869?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,15);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/08/15783869.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">한국이미지상에 &#039;케데헌&#039; OST 더블랙레이블…갓·불닭볶음면도</span>
+				<span class="r_ico_b r_modify is_outdated"><b>7일전</b></span>
+			</span>
+			</a>
+		</li>
+		</ul>
+	
+		<ul class="press_edit_news_list">
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88048939" data-comment='{"gno":"news001,0015783369","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015783369?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,16);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/08/15783369.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">트와이스, 내년 4월 도쿄 국립경기장 콘서트…해외 가수 최초</span>
+				<span class="r_ico_b r_modify is_outdated"><b>7일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88048391" data-comment='{"gno":"news001,0015783336","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015783336?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,17);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/08/15783336.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">美 &#039;히트메이커&#039; 시상식서 로제·&#039;케데헌&#039; 가수들 수상</span>
+				<span class="r_ico_b r_modify is_outdated"><b>7일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88047622" data-comment='{"gno":"news001,0015783275","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015783275?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,18);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/08/15783275.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">50주년 이광조 &#034;외로움보다 사무치는 그리움…죽기 살기로 노래&#034;</span>
+				<span class="r_ico_b r_modify is_outdated"><b>7일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88041518" data-comment='{"gno":"news001,0015783037","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015783037?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,19);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/07/15783037.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">폴킴, 연말 공연 &#039;폴리데이&#039;…&#034;행복한 이 순간 마음에 간직&#034;</span>
+				<span class="r_ico_b r_modify is_outdated"><b>7일전</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88035236" data-comment='{"gno":"news001,0015782561","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015782561?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,20);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/07/15782561.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">BTS RM &#034;해체·중단도 생각했지만…잘 준비해 보여드리겠다&#034;</span>
+				<span class="r_ico_b r_modify is_dated"><b>2025.12.07.</b></span>
+			</span>
+			</a>
+		</li>
+		</ul>
+	
+		<ul class="press_edit_news_list">
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88028379" data-comment='{"gno":"news001,0015782203","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015782203?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,21);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/06/15782203.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">美 음악지 컨시퀀스 &#039;최고의 노래&#039;에 &#039;케데헌&#039; OST·르세라핌</span>
+				<span class="r_ico_b r_modify is_dated"><b>2025.12.06.</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88028377" data-comment='{"gno":"news001,0015782202","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015782202?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,22);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/06/15782202.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">자우림 &#034;전쟁 같은 경쟁과 혼란…음악이 위로·치유되길&#034;</span>
+				<span class="r_ico_b r_modify is_dated"><b>2025.12.06.</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88028029" data-comment='{"gno":"news001,0015782187","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015782187?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,23);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/06/15782187.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">트와이스, 오늘 홍콩 콘서트…화재 참사 구호에 1억9천만원 기부</span>
+				<span class="r_ico_b r_modify is_dated"><b>2025.12.06.</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88027220" data-comment='{"gno":"news001,0015782142","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015782142?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,24);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/06/15782142.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">[가요소식] TXT &#039;굿 보이 곤 배드&#039; 스포티파이 2억 스트리밍</span>
+				<span class="r_ico_b r_modify is_dated"><b>2025.12.06.</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88027063" data-comment='{"gno":"news001,0015782137","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015782137?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,25);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/06/15782137.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">&#039;10주년&#039; 데이식스, 15일 첫 크리스마스 시즌송 발표</span>
+				<span class="r_ico_b r_modify is_dated"><b>2025.12.06.</b></span>
+			</span>
+			</a>
+		</li>
+		</ul>
+	
+		<ul class="press_edit_news_list">
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88026981" data-comment='{"gno":"news001,0015782132","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015782132?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,26);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/06/15782132.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">英 싱글 차트서 &#039;골든&#039; 13위 등 &#039;케데헌&#039; OST 3곡 롱런</span>
+				<span class="r_ico_b r_modify is_dated"><b>2025.12.06.</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88015848" data-comment='{"gno":"news001,0015781306","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015781306?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,27);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/05/15781306.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">BTS 정국·에스파 윈터 열애설…양측 소속사는 &#039;노 코멘트&#039;</span>
+				<span class="r_ico_b r_modify is_dated"><b>2025.12.05.</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88014487" data-comment='{"gno":"news001,0015781192","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015781192?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,28);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/05/15781192.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">美 명문대 USC 애넌버그에 &#039;지드래곤 조명&#039; 정규 강좌 개설</span>
+				<span class="r_ico_b r_modify is_dated"><b>2025.12.05.</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88013949" data-comment='{"gno":"news001,0015781125","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015781125?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,29);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/05/15781125.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">이재상 하이브 대표 &#034;K팝 성공 전략, 팬 참여 선순환이 핵심&#034;</span>
+				<span class="r_ico_b r_modify is_dated"><b>2025.12.05.</b></span>
+			</span>
+			</a>
+		</li>
+		
+	
+		
+		
+		<li class="press_edit_news_item as_thumb _rcount" data-journalist-article-id="88008724" data-comment='{"gno":"news001,0015780591","type":"journalist"}'>
+			<a href="https://n.news.naver.com/article/001/0015780591?type=journalists" class="press_edit_news_link" onclick="nclk(event,'man.list',001,30);">
+			
+			<span class="press_edit_news_thumb">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://mimgnews.pstatic.net/image/origin/001/2025/12/05/15780591.jpg?type=nf212_140" width="106" height="70" alt="" onerror="showNoImage(this)">
+				
+			</span>
+			
+			<span class="press_edit_news_text">
+				<span class="press_edit_news_title">박진영, 취약계층 환아에 10억원 기부…4년간 누적 40억원</span>
+				<span class="r_ico_b r_modify is_dated"><b>2025.12.05.</b></span>
+			</span>
+			</a>
+		</li>
+		</ul>
+	
+	</div>
+</div>
+
+	<div class="r_more r_more_load _load_more_journalist_article">
+		<div class="r_more_loader">
+			
+<div class="r_more_loading_icon">
+	<i class="r_more_dot as_1" aria-label="로딩"></i>
+	<i class="r_more_dot as_2" aria-label="로딩"></i>
+	<i class="r_more_dot as_3" aria-label="로딩"></i>
+	<i class="r_more_dot as_4" aria-label="로딩"></i>
+	<i class="r_more_dot as_5" aria-label="로딩"></i>
+	<i class="r_more_dot as_6" aria-label="로딩"></i>
+</div>
+		</div>
+	</div>
+		
+	
+
+
+							</div>
+						</div>
+					</div>
+					
+						<div class="journalist_desc_wrap">
+							<div class="journalist_desc">기자가 직접 선정한 뉴스입니다.</div>
+						</div>
+					
+				</div>
+			</section>
+		</div>
+
+		
+		<section class="journalist_aside _aside_wrapper">
+			<div class="journalist_aside_inner _aside_content">
+				<h3 class="blind">구독</h3>
+				<div class="_aside"></div> 
+<script>
+doAfterLoadEnd(loadAside);
+
+
+function loadAside() {
+    var forcePcVersion = "";
+
+    if (isMobileDevice() && !forcePcVersion) {
+        return;
+    }
+    var iframe = append(); 
+    var asideFixed;
+
+    window.addEventListener('message', function(event) {
+        var data = event.data;
+
+        if (event.origin !== "https://news.naver.com") {  
+            return;
+        }
+
+        if (data.type === "setIframeSize" && data.height) {
+            iframe.style.height = data.height + 'px';
+            iframe.style.visibility = ""; 
+
+            try {
+                asideFixed.deactivate(); // event 중복 적용되지 않게
+            } catch(e) {}
+
+            asideFixed = AsideFixed({
+                "wrapper" : document.querySelector("._aside_wrapper")
+                
+            });
+        }
+    });
+    
+    
+    function append() {
+        var iframe = document.createElement('iframe');
+
+        iframe.title = "구독 및 추천 채널";
+        iframe.width = "100%";
+        iframe.height = "0"; 
+        iframe.style.visibility = "hidden"; 
+        iframe.setAttribute("frameborder", "no");
+        iframe.setAttribute("scrolling", "no");
+        iframe.src = "https://news.naver.com/aside?oid=001";
+
+        document.querySelector("._aside").appendChild(iframe);
+
+        return iframe;
+    }
+}
+</script>
+			</div>
+		</section>
+	</div>
+</div>
+
+
+	
+
+
+
+
+<hr /> 
+<div class="mp_footer">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="f_maininfo">
+        <div class="f_maininfoinner">
+            <a href="javascript:topPage();" class="r_pg_top _go_top" id="goTop" onclick="nclk(event, 'fot.pctop', '', '');">맨위로</a>
+
+            <footer role="contentinfo">
+                <p class="u_cr">
+                    
+
+
+
+
+<span class="u_ftm _footer_login">
+    <span class="u_cri u_cri_v1"><a href="https://m.naver.com/services.html"  data-mpurl='{"m":"https://m.naver.com/services.html","p":"https://www.naver.com/more.html"}' class="u_cra" onclick="nclk(event,'fot.serviceall','','');">전체서비스</a></span>
+</span>
+<span class="u_ftm">
+    <span class="u_cri u_cri_v1"><a href="https://news.naver.com/ombudsman" data-mpurl='{"m":"https://news.naver.com/ombudsman","p":"https://news.naver.com/ombudsman"}' class="u_cra" onclick="nclk(event,'fot.guide','','');">서비스안내</a></span>
+    <span class="u_cri u_cri_v1"><a href="https://help.naver.com/alias/news/news_001.naver" data-mpurl='{"m":"https://help.naver.com/alias/news/news_001.naver","p":"https://help.naver.com/alias/news/news_001.naver"}' class="u_cra" onclick="nclk(event,'fot.report','','');">오류신고</a></span>
+    <span class="u_cri u_cri_v1"><a href="https://help.naver.com/alias/news/news_007.naver" data-mpurl='{"m":"https://help.naver.com/alias/news/news_007.naver","p":"https://help.naver.com/alias/news/news_007.naver"}' class="u_cra" onclick="nclk(event,'fot.help','','');">고객센터</a></span>
+</span>
+
+                    
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        
+    
+    
+    
+
+
+<span class="cr_rule">
+
+    <span class="cr_rulea">청소년 보호 책임자 : 이정규</span>
+</span>
+
+<span class="u_presscopy">
+    각 언론사가 직접 콘텐츠를 편집합니다.
+    
+        <span class="u_presscopy_a">ⓒ 연합뉴스</span>
+    
+</span>
+
+<span class="u_copyright">이 콘텐츠의 저작권은 저작권자 또는 제공처에 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 법적 책임을 질 수 있습니다.</span>
+<span class="u_naverlogo"><a href="https://www.navercorp.com/" data-mpurl='{"m":"https://www.navercorp.com/","p":"https://www.navercorp.com/"}' class="u_naverlogo_a" id="nhnLink" onclick="nclk(event,'fot.navercorp','','');">NAVER</a></span>
+
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+	
+	
+		
+		
+		
+			
+			
+				<script type="text/javascript" src="https://ssl.pstatic.net/static.news/mnews/resources/20251210_122042/js/generated/news.mobile.js"></script>
+			
+				<script type="text/javascript" src="https://ssl.pstatic.net/static.news/mnews/resources/20251210_122042/js/generated/journalisthome.dependency.js"></script>
+			
+		
+	
+
+	
+	<script type="text/javascript">
+    var config = {
+        "neloCollectorUrl": "https://kr-col-ext.nelo.navercorp.com/_store",
+        "projectName": "P638fcb_news-mobile-front",
+        "host": "real"
+    }
+
+    try{
+        neloSender.init(config);
+    }catch(e){}
+</script>
+
+
+	<script type="text/javascript">
+/**
+ * 이 파일은 모바일 뉴스 서비스 전체 페이지에 적용되는 스크립트로써,
+ * 코드 추가 시 Front-End 성능 관점에서 주의를 요합니다.
+ */
+jQuery(window).on('load', function(){
+    setTimeout(onload, 10);
+
+    function onload(){
+        var oLnb = new news.Lnb('._lnb_scroll');
+        new news.ImageLazyLoader().load("img[data-src]");
+        new news.MoveTopButton("._go_top");
+
+        
+        new news.HistoryManager().init("naver_mobile_news_history", "");
+
+        // iframe lazy-loading
+        (function(){
+            try {
+                Array.prototype.slice.apply(document.querySelectorAll('iframe[data-src]'))
+                    .forEach(function(iframeEl) {
+                        var originSrc = iframeEl.getAttribute('data-src');
+                        if(originSrc) {
+                            iframeEl.setAttribute('src', originSrc);
+                        }
+                    });
+            }catch(e) {}
+        })();
+
+        if(typeof init === "function"){
+            init();
+        }
+
+        var cookie = news.Cookie.getInstance();
+        var isShownNewLnb = cookie.getItem("isShownNewLnb");
+        if(isShownNewLnb == null) {
+            isShownNewLnb = "Y";
+            cookie.setItem("isShownNewLnb", isShownNewLnb, 3650, "", "/");
+            $("._isNew").addClass("is_new");
+        }
+
+        {
+            var footerLogin = jQuery(document).find('._footer_login');
+            if(footerLogin <= 0) {
+                return;
+            }
+
+            // 디바이스에 따라 로그인, 로그아웃 URL 분기
+            var loginUrl = "https://nid.naver.com/nidlogin.login";
+            var logoutUrl = "https://nid.naver.com/nidlogin.logout?";
+            if (news.Util.getAgentInfo().bMobileOrTablet) {
+                loginUrl = "https://nid.naver.com/nidlogin.login?svctype=262144";
+                logoutUrl = "https://nid.naver.com/nidlogin.logout?svctype=262144&";
+            }
+
+            if(news.LoginAssistor.isLoginUser()) {
+                footerLogin.prepend('<span class="u_cri u_cri_v1"><a href="javascript:news.Util.logout(\''+logoutUrl+'url=\'+encodeURIComponent(location.href));" class="u_cra" id="news_logout" onclick="nclk(event,\'fot.logout\',\'\',\'\');" >로그아웃</a></span>')
+            }else {
+                footerLogin.prepend('<span class="u_cri u_cri_v1"><a href="'+loginUrl+'" class="u_cra" id="news_login" onclick="nclk(event,\'fot.login\',\'\',\'\');" >로그인</a></span>')
+            }
+        }
+    }
+});
+</script>
+
+
+
+	
+	
+		
+
+
+	
+	
+	
+		
+	
+
+
+	
+	
+	
+		
+	
+
+
+
+<script type="text/javascript">
+
+JournalistHomePersistManager.initPersist();
+
+function init() {
+
+	/* 기자 프로필 통계 mp 반영 */
+	if ($('._media_reporter_detail_profile_box').hasClass('is_loading')) {
+		$('._media_reporter_detail_profile_box').removeClass('is_loading');
+	}
+	if (!isMobileDevice()) {
+		$('._media_reporter_detail_profile_box').removeClass('is_closed');
+		$('._media_reporter_detail_profile_box').addClass('is_opened');
+	}
+
+	/* 기자 구독 버튼 */
+	try {
+		new JournalistHomeMainManager.JournalistSubscribeButton({
+			officeId: '001',
+			mediaDomain: 'https://media.naver.com',
+			
+				followPress: true,
+			
+		});
+	} catch (e) {}
+	/* 기자 구독 버튼 */
+
+	/* 기자 응원 버튼 */
+	try {
+		new news.JsLoader().setConfig({
+			'sCharSet': 'utf-8' // default
+		}).load(['https://news.like.naver.com/js/reaction/dist/reaction.min.js?v=' + Math.floor(new Date().getTime() / 1200000)], function() {
+			var oReactionCheerDecorator = new news.ReactionCheerDecorator();
+
+			reaction.init({
+				type: "basic",
+				domain : "https://news.like.naver.com",
+				cssId: "journalist",
+				isDuplication : false,
+				contentCountPerOnceRequest : 10,
+				isDebugMode : false,
+				callback : {
+					updated : function(){
+						oReactionCheerDecorator.init();
+					},
+					clicked : function(param){
+						oReactionCheerDecorator.updateByClick(param);
+					},
+					click : function (){
+						
+						if (LoginAssistor.isLoginUser()) {
+							return;
+						}
+
+						LoginAssistor.goLoginPageByAgent();
+						return false; 
+					}
+				}
+			});
+		});
+	} catch (e) {}
+	/* 기자 응원 버튼 */
+
+	/* 공유하기 */
+	try {
+		new news.JsLoader().setConfig({
+			'sCharSet': 'utf-8' // default
+		}).load(['https://ssl.pstatic.net/spi/js/release/ko_KR/splugin.m.js?v=' + Math.floor(new Date().getTime() / 1200000)], function() {
+			window.__splugin = SocialPlugIn_Core({
+				// nEvent Key
+				"evKey"  : "news",
+				"dimmed" : "fixed",
+				"darkMode"    : isDarkShareLayer(),
+				"serviceName" : "뉴스",
+				"sourceName" : "연합뉴스",
+				"onClick"     : function(button) {},
+				"onShow"      : function() {},
+				"onHide"      : function() {},
+				"onResize"    : function(event) {},
+				"onRotate"    : function(event) {}
+			});
+		});
+	} catch (e) {}
+	/* 공유하기 */
+
+	/* 기자 공지글 말줄임 */
+	try {
+		new JournalistHomeMainManager.ProfileNoticeAbbreviate();
+	} catch (e) {}
+	/* 기자 공지글 말줄임 */
+
+	/* 기자 프로필•통계 더보기 */
+	// 프로필 더보기
+	try {
+		new JournalistHomeMoreProfileManager({
+			billboardChartLibUrl: ['https://ssl.pstatic.net/static.news/mnews/resources/20251210_122042/js/generated/billboard.pkgd.min.js'],
+			statisticsData: '{"womanCount":3599,"manCount":1445,"womanPercent":71,"manPercent":29}'
+		});
+	} catch (e) {}
+
+	// Channel plugin
+	try {
+		new news.ChannelPlugin()
+				.init({
+					channelPluginApiDomain: "https://api.channel-plugin.naver.com",
+					followLayerAutoCloseMs: 5000,
+					nclickPrefix: 'man'
+				});
+	} catch (e) {}
+	/* //기자 프로필•통계 더보기 */
+
+	/* 콘텐츠 영역 슬라이드업 동작 */
+	try {
+		new JournalistHomeMainManager.ProfileSlideUp('.body_journalist', {
+			sProfileHeadSelector: '.journalist_profile_head',
+			sProfileBodySelector: '.journalist_profile_body_inner',
+			sContentAreaSelector: '.journalist_main',
+			aResizeButtonSelectors: ['._media_reporter_detail_profile_box']
+		});
+	} catch (e) {}
+	/* 콘텐츠 영역 슬라이드업 동작 */
+
+	/* 상단 플로팅 적용 */
+	try {
+		new JournalistHomeMainManager.Floating(isMobileDevice());
+	} catch (e) {}
+	/* 상단 플로팅 적용 */
+
+	/* 기사 댓글 수 */
+	try {
+		news.CommentCountPainterToList.getInstance().renderCommentCount({
+			sApiUrl: '/commonComment/JournalistCount',
+			linkDomainMap: {
+				journalist: 'https://n.news.naver.com'
+			}
+		});
+	} catch (e) {}
+	/* 기사 댓글 수 */
+
+	/* 큐레이션 카드 안내 레이어 */
+	try {
+		new JournalistHomeMainManager.CurationCardToggle();
+	} catch (e) {}
+	/* 큐레이션 카드 안내 레이어 */
+
+	/* 기자편집카드 > 캐로셀형 플리킹 동작 */
+	if (!isMobileDevice()) {
+		$('._journalist_carousel_wrapper').each(function(index, el) {
+			new JournalistHomeMainManager.CarouselFlickingManager($(el), {
+				nIndex: index
+			});
+		});
+	}
+	/* 기자편집카드 > 캐로셀형 플리킹 동작 */
+
+	/* 기사 더보기 */
+	try {
+		var moreViewWrapper = $('._journalist_more_view');
+		new JournalistHomeMainManager.ArticleMoreView(moreViewWrapper, {
+			sJournalistId: '',
+			bCuration: moreViewWrapper.hasClass('_CURATION_CARD'),
+			sCommentLinkDomain: 'https://n.news.naver.com'
+		});
+	} catch (e) {}
+	/* 기사 더보기 */
+
+	/* 가로스크롤 일괄 추가 */
+	try {
+		$("._hor_scroller").each(function(index, scrollerWrapper) {
+			if ($(scrollerWrapper).hasClass('_journalist_profile_notice_scroll')) {
+				ScrollForNative(scrollerWrapper, {
+					scrollDistanceRate: 1,
+					onApplyScrollNavState: function (isPrevReach, isNextReach, prevBtn, nextBtn) {
+						if (isPrevReach) {
+							prevBtn.addClass('is_hidden');
+						} else {
+							prevBtn.removeClass('is_hidden');
+						}
+						if (isNextReach) {
+							nextBtn.addClass('is_hidden');
+						} else {
+							nextBtn.removeClass('is_hidden');
+						}
+					}
+				});
+			} else {
+				ScrollForNative(scrollerWrapper, {});
+			}
+		});
+	} catch (e) {}
+	/* 가로스크롤 일괄 추가 */
+
+	/* 기자홈 전체기사/기자TALK 탭 > 기자TALK 가이드 레이어 */
+	try {
+		JournalistHomeMainManager.showJournalistTalkGuidePopup('.journalist_article_tab_tooltip');
+	} catch (e) {}
+	/* 기자홈 전체기사/기자TALK 탭 > 기자TALK 가이드 레이어 */
+
+	/* 제평위 계약만료 레이어 */
+	
+	/* 제평위 계약만료 레이어 */
+
+}
+
+function getMyFeedUrl() {
+    if (isMobileDevice()) {
+        return null; 
+    } else {
+        return "https://news.naver.com";
+    }
+}
+
+function goMainChannelUrl() {
+	if (isMobileDevice()) {
+		return news.Util.goMainChannel();
+	} else {
+		return window.location = "https://news.naver.com";
+	}
+}
+
+setTimeout(function() {
+	/* '{언론사}의 기사를 더 보려면?' 배너 > 언론사 구독 */
+	new news.ChannelSubscribeButton('._channel_subscribe_btn_journalist', {
+		officeId: '001',
+		buttonClassName: 'channel_add_btn',
+		nclk_add: 'man.psub',
+		nclk_remove: 'man.pusub',
+		nclk_info: null,
+	});
+	/* '{언론사}의 기사를 더 보려면?' 배너 > 언론사 구독 */
+}, 700);
+</script>
+
+	
+
+	<script>
+    var gnb_service = 'news';
+    var gnb_logout = encodeURIComponent(location.href);
+    var gnb_template = 'gnb_utf8';
+    var gnb_brightness = 1;
+    var gnb_item_hide_option= 128; 
+
+    doAfterLoadEnd(function () {
+        try {
+            GlobalMPUrlManager.init();
+        } catch (e) {}
+    });
+
+    doAfterLoadEnd(function() {
+        if (!document.querySelector('#gnb') || isMobileDevice() === true) { 
+            return;
+        }
+        
+        var gnb_src = "https://ssl.pstatic.net/static.gn/templates/gnb_utf8?2025121513";
+
+        // GnbHelper를 이용하여 GNB Layer를 닫을 수 있도록 지원한다.
+        if (window.jindo) {
+            jindo.LazyLoading.load(
+                gnb_src,
+                function() {
+                    try {
+                        getGNB();
+                    } catch(e) {}
+                },
+                'utf-8'
+            );
+
+            jindo.$Fn(function (oEvent) {
+                
+                GnbHelper.attachClick(oEvent.$value().target);
+            }).attach(document, 'click');
+        } else if (window.jQuery) {
+            new news.JsLoader().
+                load(
+                    [gnb_src],
+                    function() {
+                        try {
+                            getGNB();
+                        } catch(e) {}
+                    }
+                );
+
+            $(document).on("click", function(event) {
+                GnbHelper.attachClick(event.target);
+            });
+        }
+    });
+</script>
+
+<script>
+doAfterLoadEnd(function() {
+    try {
+        new SearchAutoComplete({
+            content: document.querySelector("._search_content"),
+            contentToggleBtn: document.querySelector("._search_content_toggle_btn"),
+            isMobile: isMobileDevice(),
+            nClickType: "newsM"
+        });
+    } catch(e) {}
+});
+</script>
+	<!-- LCS -->
+	
+
+
+
+<script type="text/javascript">
+
+function initMa(){
+    var data = {
+        "service": "news",
+        "baseInfo": {
+            "category": (function(){
+                
+                var result = "기자 페이지";
+
+                if(result !== ""){
+                    return result;
+                }
+                try{
+                    
+                    return document.querySelector('meta[property="og:title"]')
+                        .getAttribute('content')
+                        .replace(/[\s]*:+[\s]*네이버[\s]*뉴스/, '');
+                }catch(e){
+                    return "";
+                }
+            })()
+        },
+        "extraInfo": {}
+    };
+
+    
+    data.extraInfo.officeId = "001";
+    
+
+    try{
+        ma.init({
+            api: "https://ma.news.naver.com/l",
+            data: data
+        });
+    }catch(e){}
+}
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    window.ntm_news = window.ntm_news || [];
+
+    doAfterLoadEnd(function () {
+        var ntmUrl = "https://ntm.pstatic.net/scripts/ntm_b7032129a433.js";
+
+        
+        
+        
+
+        ntmInit(ntmUrl);
+    });
+</script>
+
+
+<script type="text/javascript">
+    // NLog pageview 전송
+    var eventType = "onpageshow" in window ? "pageshow" : "load";
+    jQuery(window).on(eventType, function() {
+        var sti = "";
+        var gdid = "";
+        
+        
+            
+
+            
+            
+                if (isMobileDevice()) {
+                    // mobile
+                    
+                } else {
+                    // pc
+                    
+                        sti = "news"
+                    
+                }
+            
+        
+
+        // ma 전송
+        try {
+            initMa();
+        } catch (e) {
+        }
+
+        ntmCustomPageViewSend({
+            sti: sti,
+            gdid: gdid
+        });
+    });
+</script>
+
+	<!-- //LCS -->
+	<div id="videoWrap"></div>
+</body>
+</html>

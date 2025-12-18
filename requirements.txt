@@ -1,0 +1,11 @@
+requests
+beautifulsoup4
+lxml
+google-genai
+tkVideoPlayer
+moviepy==1.0.3
+groq
+edge-tts
+openai-whisper
+yt-dlp
+torch
