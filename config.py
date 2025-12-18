@@ -1,6 +1,10 @@
 # config.py
 import os
 from settings_manager import settings_manager
+from dotenv import load_dotenv
+
+# .env 파일 로드
+load_dotenv()
 
 # API Keys
 # Priorities: 1. settings.json (via settings_manager) -> 2. Environment Variables (.env) -> 3. Default (for playground/dev)

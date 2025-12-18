@@ -9,3 +9,4 @@ edge-tts
 openai-whisper
 yt-dlp
 torch
+python-dotenv
