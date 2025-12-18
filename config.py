@@ -3,14 +3,25 @@ import os
 from settings_manager import settings_manager
 from dotenv import load_dotenv
 
-# .env 파일 로드
-load_dotenv()
+# .env 파일 로드 (절대 경로 사용)
+base_dir = os.path.dirname(os.path.abspath(__file__))
+env_path = os.path.join(base_dir, '.env')
+if os.path.exists(env_path):
+    load_dotenv(env_path)
+    print(f"  ✅ .env 파일 로드됨: {env_path}")
+else:
+    print(f"  ⚠️ .env 파일을 찾을 수 없습니다: {env_path}")
 
 # API Keys
 # Priorities: 1. settings.json (via settings_manager) -> 2. Environment Variables (.env) -> 3. Default (for playground/dev)
 PEXELS_API_KEY = settings_manager.get('PEXELS_API_KEY', os.getenv('PEXELS_API_KEY', ""))
 GEMINI_API_KEY = settings_manager.get('GEMINI_API_KEY', os.getenv('GEMINI_API_KEY', ""))
 GROQ_API_KEY = settings_manager.get('GROQ_API_KEY', os.getenv('GROQ_API_KEY', ""))
+
+if not GROQ_API_KEY:
+    print("  ⚠️ 경고: GROQ_API_KEY가 설정되지 않았습니다. .env 파일이나 환경 변수를 확인하세요.")
+else:
+    print(f"  ✅ GROQ_API_KEY 로드 완료 ({GROQ_API_KEY[:5]}***)")
 
 # Pexels API Settings
 PEXELS_API_URL = "https://api.pexels.com/videos/search"
